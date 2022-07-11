@@ -3,9 +3,8 @@
 #include <string.h>
 #define HASHSIZE 620909
 
-int main(){
-    
- 
- 
+int main()
+{
+
     return 0;
 }

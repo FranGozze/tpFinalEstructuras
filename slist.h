@@ -24,11 +24,6 @@ SList slist_create();
 void slist_destroy(SList list, functionListFree function);
 
 /**
- * Determina si la lista es vacía.
- */
-int slist_vacia(SList list);
-
-/**
  *
  */
 void push(SList *list, void *data);

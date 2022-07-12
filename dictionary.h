@@ -7,10 +7,10 @@ typedef struct dict_entry_s
     int hash;
 } dict_entry_s;
 
-unsigned hash_dict();
-void destroy_dict();
-int cmp();
-dict_entry_s *copy();
+unsigned hash_dict(dict_entry_s *entry);
+void destroy_dict(dict_entry_s *entry);
+int cmp(dict_entry_s *entry1, dict_entry_s *entry2);
+dict_entry_s *copy(dict_entry_s *entry);
 
 void add_dict();
 void new_dict();

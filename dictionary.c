@@ -35,7 +35,6 @@ int find_dict(TablaHash table, char *key)
 {
     return tablahash_buscar(table, key)) ? 1 : 0 ;
 }
-unsigned hash_dict();
 void add_dict();
 void destroy_dict();
 TablaHash new_dict()

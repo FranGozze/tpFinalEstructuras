@@ -16,15 +16,15 @@ typedef SNodo *SList;
 /**
  * Devuelve una lista vacía.
  */
-SList slist_create();
+SList list_create();
 
 /**
  * Destruccion de la lista.
  */
-void slist_destroy(SList list, functionListFree function);
+void list_destroy(SList list, functionListFree function);
 
 /**
  *
  */
-void push(SList *list, void *data);
+void list_push(SList *list, void *data);
 #endif /* __SLIST_H__ */

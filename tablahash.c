@@ -1,6 +1,7 @@
 #include "tablahash.h"
 #include <assert.h>
 #include <stdlib.h>
+#include "slist.h"
 
 /**
  * Casillas en la que almacenaremos los datos de la tabla hash.
@@ -13,16 +14,6 @@ typedef struct
 /**
  * Estructura principal que representa la tabla hash.
  */
-struct _TablaHash
-{
-  CasillaHash *elems;
-  unsigned numElems;
-  unsigned capacidad;
-  FuncionCopiadora copia;
-  FuncionComparadora comp;
-  FuncionDestructora destr;
-  FuncionHash hash;
-};
 
 /**
  * Crea una nueva tabla hash vacia, con la capacidad dada.
@@ -35,7 +26,7 @@ TablaHash tablahash_crear(unsigned capacidad, FuncionCopiadora copia,
   // Pedimos memoria para la estructura principal y las casillas.
   TablaHash tabla = malloc(sizeof(struct _TablaHash));
   assert(tabla != NULL);
-  tabla->elems = malloc(sizeof(CasillaHash) * capacidad);
+  tabla->elems = malloc(sizeof(SList) * capacidad);
   assert(tabla->elems != NULL);
   tabla->numElems = 0;
   tabla->capacidad = capacidad;
@@ -47,7 +38,7 @@ TablaHash tablahash_crear(unsigned capacidad, FuncionCopiadora copia,
   // Inicializamos las casillas con datos nulos.
   for (unsigned idx = 0; idx < capacidad; ++idx)
   {
-    tabla->elems[idx].dato = NULL;
+    tabla->elems[idx] = NULL;
   }
 
   return tabla;
@@ -71,8 +62,9 @@ void tablahash_destruir(TablaHash tabla)
 
   // Destruir cada uno de los datos.
   for (unsigned idx = 0; idx < tabla->capacidad; ++idx)
-    if (tabla->elems[idx].dato != NULL)
-      tabla->destr(tabla->elems[idx].dato);
+    if (tabla->elems[idx] != NULL)
+      for (SList node = tabla->elems[idx]; node; node = node->sig)
+        tabla->destr(node);
 
   // Liberar el arreglo de casillas y la tabla.
   free(tabla->elems);
@@ -86,29 +78,11 @@ void tablahash_destruir(TablaHash tabla)
  */
 void tablahash_insertar(TablaHash tabla, void *dato)
 {
-
-  // Calculamos la posicion del dato dado, de acuerdo a la funcion hash.
   unsigned idx = tabla->hash(dato) % tabla->capacidad;
+  tabla->numElems++;
 
-  // Insertar el dato si la casilla estaba libre.
-  if (tabla->elems[idx].dato == NULL)
-  {
-    tabla->numElems++;
-    tabla->elems[idx].dato = tabla->copia(dato);
-    return;
-  }
-  // Sobrescribir el dato si el mismo ya se encontraba en la tabla.
-  else if (tabla->comp(tabla->elems[idx].dato, dato) == 0)
-  {
-    tabla->destr(tabla->elems[idx].dato);
-    tabla->elems[idx].dato = tabla->copia(dato);
-    return;
-  }
-  // No hacer nada si hay colision.
-  else
-  {
-    return;
-  }
+  list_push(&tabla->elems[idx], dato);
+  return;
 }
 
 /**
@@ -117,19 +91,17 @@ void tablahash_insertar(TablaHash tabla, void *dato)
  */
 void *tablahash_buscar(TablaHash tabla, void *dato)
 {
-
-  // Calculamos la posicion del dato dado, de acuerdo a la funcion hash.
   unsigned idx = tabla->hash(dato) % tabla->capacidad;
+  if (tabla->elems[idx] == NULL)
+    return NULL;
 
-  // Retornar NULL si la casilla estaba vacia.
-  if (tabla->elems[idx].dato == NULL)
-    return NULL;
-  // Retornar el dato de la casilla si hay concidencia.
-  else if (tabla->comp(tabla->elems[idx].dato, dato) == 0)
-    return tabla->elems[idx].dato;
-  // Retornar NULL en otro caso.
   else
-    return NULL;
+    for (SList node = tabla->elems[idx]; node; node = node->sig)
+      if (tabla->comp(node->data, dato))
+        return node;
+
+  // Retornar NULL en otro caso.
+  return NULL;
 }
 
 /**
@@ -142,16 +114,19 @@ void tablahash_eliminar(TablaHash tabla, void *dato)
   unsigned idx = tabla->hash(dato) % tabla->capacidad;
 
   // Retornar si la casilla estaba vacia.
-  if (tabla->elems[idx].dato == NULL)
+  if (tabla->elems[idx] == NULL)
     return;
   // Vaciar la casilla si hay coincidencia.
-  else if (tabla->comp(tabla->elems[idx].dato, dato) == 0)
-  {
-    tabla->numElems--;
-    tabla->destr(tabla->elems[idx].dato);
-    tabla->elems[idx].dato = NULL;
-    return;
-  }
+  else
+    for (SList node = tabla->elems[idx]; node; node = node->sig)
+      if (tabla->comp(node->data, dato))
+      {
+        tabla->numElems--;
+        // VER ESTO
+        // tabla->destr(node);
+        tabla->elems[idx] = NULL;
+        return;
+      }
 }
 
 /**

@@ -1,12 +1,12 @@
 #include "slist.h"
 #include <stdlib.h>
 
-SList slist_create()
+SList list_create()
 {
   return NULL;
 }
 
-void slist_destroy(SList list, functionListFree function)
+void list_destroy(SList list, functionListFree function)
 {
   SNodo *oldNode;
   while (list != NULL)
@@ -17,7 +17,10 @@ void slist_destroy(SList list, functionListFree function)
   }
 }
 
-void push(SList *list, void *data)
+void list_push(SList *list, void *data)
 {
-  (*list)->data = data;
+  SList new = malloc(sizeof(SList));
+  new->data = data;
+  new->sig = *list;
+  (*list) = new;
 }

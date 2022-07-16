@@ -1,5 +1,6 @@
 #ifndef __DICTIONARY_H_
 #define __DICTIONARY_H_
+#include "tablahash.h"
 
 typedef struct dict_entry_s
 {
@@ -7,13 +8,15 @@ typedef struct dict_entry_s
     int hash;
 } dict_entry_s;
 
-unsigned hash_dict(dict_entry_s *entry);
-void destroy_dict(dict_entry_s *entry);
-int cmp(dict_entry_s *entry1, dict_entry_s *entry2);
-dict_entry_s *copy(dict_entry_s *entry);
+dict_entry_s *create_entry(const char *key);
 
-void add_dict();
-void new_dict();
-void find_dict();
+unsigned dict_hash(dict_entry_s *entry);
+void dict_free(dict_entry_s *entry);
+int dict_cmp(dict_entry_s *entry1, dict_entry_s *entry2);
+dict_entry_s *dict_copy(dict_entry_s *entry);
 
+int dict_find(TablaHash table, dict_entry_s *entry);
+void dict_add(TablaHash table, dict_entry_s *entry);
+void dict_destroy(TablaHash table);
+TablaHash new_dict();
 #endif /* __DICTIONARY_H_ */

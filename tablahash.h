@@ -1,6 +1,7 @@
 #ifndef __TABLAHASH_H__
 #define __TABLAHASH_H__
 
+#include "slist.h"
 typedef void *(*FuncionCopiadora)(void *dato);
 /** Retorna una copia fisica del dato */
 typedef int (*FuncionComparadora)(void *dato1, void *dato2);
@@ -10,6 +11,17 @@ typedef void (*FuncionDestructora)(void *dato);
 /** Libera la memoria alocada para el dato */
 typedef unsigned (*FuncionHash)(void *dato);
 /** Retorna un entero sin signo para el dato */
+
+struct _TablaHash
+{
+    SList *elems;
+    unsigned numElems;
+    unsigned capacidad;
+    FuncionCopiadora copia;
+    FuncionComparadora comp;
+    FuncionDestructora destr;
+    FuncionHash hash;
+};
 
 typedef struct _TablaHash *TablaHash;
 

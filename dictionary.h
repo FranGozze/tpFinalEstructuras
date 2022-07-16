@@ -4,11 +4,11 @@
 
 typedef struct dict_entry_s
 {
-    const char *key;
+    char *key;
     int hash;
 } dict_entry_s;
 
-dict_entry_s *create_entry(const char *key);
+dict_entry_s *create_entry(char *key);
 
 unsigned dict_hash(dict_entry_s *entry);
 void dict_free(dict_entry_s *entry);

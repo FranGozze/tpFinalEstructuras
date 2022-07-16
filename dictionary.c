@@ -3,8 +3,8 @@
 #include <string.h>
 #include "tablahash.h"
 #include "dictionary.h"
-#define HASHSIZE 620909
-dict_entry_s *create_entry(const char *key)
+
+dict_entry_s *create_entry(char *key)
 {
     dict_entry_s *entry = malloc(sizeof(dict_entry_s));
     entry->key = malloc(sizeof(char) * strlen(key) + 1);
@@ -44,7 +44,7 @@ void dict_destroy(TablaHash table)
     tablahash_destruir(table);
 }
 
-TablaHash new_dict()
+TablaHash new_dict(int size)
 {
-    return tablahash_crear(HASHSIZE, (FuncionCopiadora)dict_copy, (FuncionComparadora)dict_cmp, (FuncionDestructora)dict_free, (FuncionHash)dict_hash);
+    return tablahash_crear(size, (FuncionCopiadora)dict_copy, (FuncionComparadora)dict_cmp, (FuncionDestructora)dict_free, (FuncionHash)dict_hash);
 }

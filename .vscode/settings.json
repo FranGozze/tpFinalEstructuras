@@ -1,6 +1,9 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
-        "string.h": "c"
+        "string.h": "c",
+        "slist.h": "c",
+        "stdlib.h": "c",
+        "tablahash.h": "c"
     }
 }

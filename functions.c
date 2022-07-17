@@ -28,11 +28,12 @@ void change_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
         {
             copy[i] = letter;
             dict_entry_s *entry = create_entry(copy);
-            if (dict_find(table, entry) && !dict_find(partialResults, entry))
+            if (!dict_find(partialResults, entry))
             {
-                results[(*correctWordsAmount)++] = entry;
+                dict_add(partialResults, entry);
+                if (dict_find(table, entry))
+                    results[(*correctWordsAmount)++] = entry;
             }
-            dict_add(partialResults, entry);
         }
         free(copy);
     }
@@ -48,9 +49,12 @@ void swap_letter(char *word, int wordLength, dict_entry_s *results[], int *corre
         copy[i] = copy[i + 1];
         copy[i + 1] = aux;
         dict_entry_s *entry = create_entry(copy);
-        if (dict_find(table, entry) && !dict_find(partialResults, entry))
-            results[(*correctWordsAmount)++] = entry;
-        dict_add(partialResults, entry);
+        if (!dict_find(partialResults, entry))
+        {
+            dict_add(partialResults, entry);
+            if (dict_find(table, entry))
+                results[(*correctWordsAmount)++] = entry;
+        }
     }
 }
 
@@ -62,9 +66,12 @@ void delete_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
         strcpy(copy, word);
         memmove(&copy[i], &copy[i + 1], wordLength - i);
         dict_entry_s *entry = create_entry(copy);
-        if (dict_find(table, entry) && !dict_find(partialResults, entry))
-            results[(*correctWordsAmount)++] = entry;
-        dict_add(partialResults, entry);
+        if (!dict_find(partialResults, entry))
+        {
+            dict_add(partialResults, entry);
+            if (dict_find(table, entry))
+                results[(*correctWordsAmount)++] = entry;
+        }
     }
 }
 
@@ -91,10 +98,12 @@ void insert_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
         for (int letter = 'a'; letter <= 'z' && (*correctWordsAmount) < MAX_WORDS; letter++)
         {
             dict_entry_s *entry = create_entry(addInPosition(word, wordLength, letter, i));
-
-            if (dict_find(table, entry) && !dict_find(partialResults, entry))
-                results[(*correctWordsAmount)++] = entry;
-            dict_add(partialResults, entry);
+            if (!dict_find(partialResults, entry))
+            {
+                dict_add(partialResults, entry);
+                if (dict_find(table, entry))
+                    results[(*correctWordsAmount)++] = entry;
+            }
         }
     }
 }
@@ -135,9 +144,16 @@ void corrections(char *word, TablaHash table, dict_entry_s *results[])
     int *correctWordsAmount = malloc(sizeof(int));
     *correctWordsAmount = 0;
 
-    //                                   insert_letter           change_letter       swap_letter       delete_letter
-    int firstStepPartialResultsAmount = (wordLength + 1) * 26 + wordLength * 26 + (wordLength - 1) + wordLength;
-    TablaHash firstStepPartialResults = new_dict((int)(firstStepPartialResultsAmount / 0.7));
+    //                       insert_letter           change_letter       swap_letter       delete_letter
+    int ResultsAmount = (wordLength + 1) * 26 + wordLength * 26 + (wordLength - 1) + wordLength;
+    // en segundo paso change_letter y swap_letter
+    ResultsAmount += ResultsAmount * 3;
+    // caso insert en segundo paso
+    ResultsAmount += (wordLength + 2) * 26 + (wordLength + 1) * 26 + (wordLength) + wordLength + 1;
+    // caso delete
+    ResultsAmount += (wordLength)*26 + (wordLength - 1) * 26 + (wordLength - 2) + (wordLength - 1);
+
+    TablaHash firstStepPartialResults = new_dict((int)(ResultsAmount / 0.7));
     int sizeWord = strlen(word);
     int *cont = malloc(sizeof(int));
     *cont = 0;
@@ -145,7 +161,7 @@ void corrections(char *word, TablaHash table, dict_entry_s *results[])
     for (int firstFunction = 0; firstFunction < 5 && (*correctWordsAmount) < MAX_WORDS; firstFunction++)
     {
         (*proccess[firstFunction])(word, sizeWord, results, correctWordsAmount, firstStepPartialResults, table);
-        printf("cantidad %d: calc %d \n", firstStepPartialResults->numElems, firstStepPartialResultsAmount);
+        printf("cantidad %d \n", firstStepPartialResults->numElems);
     }
     // if (*correctWordsAmount < MAX_WORDS)
     // {

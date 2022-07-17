@@ -19,7 +19,7 @@ void list_destroy(SList list, functionListFree function)
 
 void list_push(SList *list, void *data)
 {
-  SList new = malloc(sizeof(SList));
+  SList new = malloc(sizeof(SNodo));
   new->data = data;
   new->sig = *list;
   (*list) = new;

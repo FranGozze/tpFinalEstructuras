@@ -1,5 +1,6 @@
 #include "tablahash.h"
 #include <assert.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "slist.h"
 
@@ -63,8 +64,13 @@ void tablahash_destruir(TablaHash tabla)
   // Destruir cada uno de los datos.
   for (unsigned idx = 0; idx < tabla->capacidad; ++idx)
     if (tabla->elems[idx] != NULL)
-      for (SList node = tabla->elems[idx]; node; node = node->sig)
-        tabla->destr(node);
+      for (SList node = tabla->elems[idx]; node;)
+      {
+        SList oldNode = node;
+        node = (node)->sig;
+        tabla->destr(oldNode->data);
+        free(oldNode);
+      }
 
   // Liberar el arreglo de casillas y la tabla.
   free(tabla->elems);

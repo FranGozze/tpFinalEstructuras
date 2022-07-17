@@ -13,4 +13,8 @@ void insert_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
 void separate_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount, TablaHash partialResults, TablaHash table);
 void corrections(char *word, TablaHash table, dict_entry_s *results[]);
 
+// from  https://stackoverflow.com/questions/69874895/inserting-a-character-into-a-char-array
+// modifico la funcion para que haga lo que necesito
+char *addInPosition(char *str, int strSize, char c, unsigned num);
+
 #endif /* __FUNCTIONS_H__ */

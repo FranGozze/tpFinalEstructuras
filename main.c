@@ -12,8 +12,7 @@ int main()
 {
     TablaHash table = readDictionary("diccionario.txt");
     dict_entry_s *results[5] = {NULL};
-
-    corrections("caa", table, results);
+    corrections("zuzone", table, results);
     printf("\n\n");
     for (int i = 0; i < 5; i++)
         if (results[i])

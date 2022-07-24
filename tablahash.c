@@ -2,6 +2,8 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include "slist.h"
 
 /**
@@ -104,7 +106,7 @@ void *tablahash_buscar(TablaHash tabla, void *dato)
   else
     for (SList node = tabla->elems[idx]; node; node = node->sig)
       if (tabla->comp(node->data, dato))
-        return node;
+        return node->data;
 
   // Retornar NULL en otro caso.
   return NULL;
@@ -144,7 +146,8 @@ unsigned KRHash(char *s)
   unsigned hashval;
   for (hashval = 0; *s != '\0'; ++s)
   {
-    hashval = *s + 31 * hashval;
+
+    hashval = tolower(*s) + 31 * hashval;
   }
   return hashval;
 }

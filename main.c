@@ -12,11 +12,17 @@ int main()
 {
     TablaHash table = readDictionary("diccionario.txt");
     dict_entry_s *results[5] = {NULL};
-    corrections("zuzone", table, results);
+
+    corrections("aaaaaaaaa", 9, table, results);
+    dict_destroy(table);
     printf("\n\n");
     for (int i = 0; i < 5; i++)
         if (results[i])
+        {
             printf("%s\n", results[i]->key);
+            dict_free(results[i]);
+        }
+
     // dict_entry_s *entry = create_entry("aa");
     // printf("%d\n", dict_find(table, entry));
     return 0;

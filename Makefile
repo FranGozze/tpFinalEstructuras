@@ -1,8 +1,11 @@
-run: main.c slist.c tablahash.c dictionary.c common.c functions.c
+
+run: main.c slist.c tablahash.c dictionary.c common.c functions.c correctWord.c
 	- clear
-	- gcc main.c  slist.c tablahash.c dictionary.c common.c  functions.c -o main
+	- gcc main.c  slist.c tablahash.c dictionary.c common.c  functions.c correctWord.c -o main 
 	- time ./main
-val: main.c slist.c tablahash.c dictionary.c common.c functions.c
+	-rm main
+val: main.c slist.c tablahash.c dictionary.c common.c functions.c correctWord.c
 	- clear	
-	- gcc main.c  slist.c tablahash.c dictionary.c common.c  functions.c -o main
+	- gcc main.c  slist.c tablahash.c dictionary.c common.c  functions.c correctWord.c -o main
 	- valgrind  --track-origins=yes --leak-check=full ./main
+	-rm main

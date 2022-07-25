@@ -31,8 +31,7 @@ func *arrayOfFunctions()
 }
 
 void change_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount,
-                   TablaHash partialResultsTable, TablaHash table,
-                   int step)
+                   TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, int *contador)
 {
     for (int i = 0; i < wordLength && (*correctWordsAmount) < MAX_WORDS; i++)
     {
@@ -42,34 +41,24 @@ void change_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
         for (int letter = 'a'; letter <= 'z' && (*correctWordsAmount) < MAX_WORDS; letter++)
         {
             copy[i] = letter;
-            if (step != 0)
+
+            dict_entry_s *entry = create_entry(copy);
+            if (!dict_find(partialResultsTable, entry))
             {
-                func *proccess = arrayOfFunctions();
-                for (int function = 0; function < 5 && (*correctWordsAmount) < MAX_WORDS; function++)
-                    (*proccess[function])(copy, wordLength, results, correctWordsAmount, partialResultsTable, table, step - 1);
-                free(proccess);
+                dict_add(partialResultsTable, entry);
+                partialResults[(*contador)++] = entry;
+                if (dict_find(table, entry))
+                    results[(*correctWordsAmount)++] = dict_copy(entry);
             }
             else
-            {
-
-                dict_entry_s *entry = create_entry(copy);
-                if (!dict_find(partialResultsTable, entry))
-                {
-                    dict_add(partialResultsTable, entry);
-                    if (dict_find(table, entry))
-                        results[(*correctWordsAmount)++] = dict_copy(entry);
-                }
-                else
-                    dict_free(entry);
-            }
+                dict_free(entry);
         }
         free(copy);
     }
 }
 
 void swap_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount,
-                 TablaHash partialResultsTable, TablaHash table,
-                 int step)
+                 TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, int *contador)
 {
     for (int i = 0; i < wordLength - 1 && (*correctWordsAmount) < MAX_WORDS; i++)
     {
@@ -78,57 +67,42 @@ void swap_letter(char *word, int wordLength, dict_entry_s *results[], int *corre
         char aux = copy[i];
         copy[i] = copy[i + 1];
         copy[i + 1] = aux;
-        if (step != 0)
+
+        dict_entry_s *entry = create_entry(copy);
+        if (!dict_find(partialResultsTable, entry))
         {
-            func *proccess = arrayOfFunctions();
-            for (int function = 0; function < 5 && (*correctWordsAmount) < MAX_WORDS; function++)
-                (*proccess[function])(copy, wordLength, results, correctWordsAmount, partialResultsTable, table, step - 1);
-            free(proccess);
+            dict_add(partialResultsTable, entry);
+            partialResults[(*contador)++] = entry;
+            if (dict_find(table, entry))
+                results[(*correctWordsAmount)++] = dict_copy(entry);
         }
         else
-        {
-            dict_entry_s *entry = create_entry(copy);
-            if (!dict_find(partialResultsTable, entry))
-            {
-                dict_add(partialResultsTable, entry);
-                if (dict_find(table, entry))
-                    results[(*correctWordsAmount)++] = dict_copy(entry);
-            }
-            else
-                dict_free(entry);
-        }
+            dict_free(entry);
+
         free(copy);
     }
 }
 
 void delete_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount,
-                   TablaHash partialResultsTable, TablaHash table, int step)
+                   TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, int *contador)
 {
     for (int i = 0; i < wordLength && (*correctWordsAmount) < MAX_WORDS; i++)
     {
         char *copy = malloc(sizeof(char) * wordLength);
         strcpy(copy, word);
         memmove(&copy[i], &copy[i + 1], wordLength - i);
-        if (step != 0)
+
+        dict_entry_s *entry = create_entry(copy);
+        if (!dict_find(partialResultsTable, entry))
         {
-            func *proccess = arrayOfFunctions();
-            for (int function = 0; function < 5 && (*correctWordsAmount) < MAX_WORDS; function++)
-                (*proccess[function])(copy, wordLength - 1, results, correctWordsAmount, partialResultsTable, table, step - 1);
-            free(proccess);
+            dict_add(partialResultsTable, entry);
+            partialResults[(*contador)++] = entry;
+            if (dict_find(table, entry))
+                results[(*correctWordsAmount)++] = dict_copy(entry);
         }
         else
-        {
+            dict_free(entry);
 
-            dict_entry_s *entry = create_entry(copy);
-            if (!dict_find(partialResultsTable, entry))
-            {
-                dict_add(partialResultsTable, entry);
-                if (dict_find(table, entry))
-                    results[(*correctWordsAmount)++] = dict_copy(entry);
-            }
-            else
-                dict_free(entry);
-        }
         free(copy);
     }
 }
@@ -150,40 +124,31 @@ char *addInPosition(char *str, int strSize, char c, unsigned num)
 }
 
 void insert_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount,
-                   TablaHash partialResultsTable, TablaHash table,
-                   int step)
+                   TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, int *contador)
 {
     for (int i = 0; i < wordLength + 1; i++)
     {
         for (int letter = 'a'; letter <= 'z' && (*correctWordsAmount) < MAX_WORDS; letter++)
         {
             char *copy = addInPosition(word, wordLength, letter, i);
-            if (step != 0)
+            dict_entry_s *entry = create_entry(copy);
+            if (!dict_find(partialResultsTable, entry))
             {
-                func *proccess = arrayOfFunctions();
-                for (int function = 0; function < 5 && (*correctWordsAmount) < MAX_WORDS; function++)
-                    (*proccess[function])(copy, wordLength + 1, results, correctWordsAmount, partialResultsTable, table, step - 1);
-                free(proccess);
+                dict_add(partialResultsTable, entry);
+                partialResults[(*contador)++] = entry;
+                if (dict_find(table, entry))
+                    results[(*correctWordsAmount)++] = dict_copy(entry);
             }
             else
-            {
-                dict_entry_s *entry = create_entry(copy);
-                if (!dict_find(partialResultsTable, entry))
-                {
-                    dict_add(partialResultsTable, entry);
-                    if (dict_find(table, entry))
-                        results[(*correctWordsAmount)++] = dict_copy(entry);
-                }
-                else
-                    dict_free(entry);
-            }
+                dict_free(entry);
+
             free(copy);
         }
     }
 }
 
 void separate_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount,
-                     TablaHash partialResultsTable, TablaHash table, int step)
+                     TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, int *contador)
 {
     char *aux = word;
     for (int i = 0; i + 1 < wordLength; i++)
@@ -206,7 +171,6 @@ void separate_letter(char *word, int wordLength, dict_entry_s *results[], int *c
         dict_free(entry1);
         dict_free(entry2);
         free(copy1);
-        // free(copy2);
     }
 }
 
@@ -214,6 +178,7 @@ void corrections(char *word, int wordLength, TablaHash table, dict_entry_s *resu
 {
     int *correctWordsAmount = malloc(sizeof(int));
     *correctWordsAmount = 0;
+    int *contador = malloc(sizeof(int));
 
     func *proccess = arrayOfFunctions();
     unsigned FirstResultsAmount = (wordLength + 1) * 26 + wordLength * 26 + (wordLength - 1) + wordLength;
@@ -224,18 +189,33 @@ void corrections(char *word, int wordLength, TablaHash table, dict_entry_s *resu
     // caso delete
     SecondResultsAmount += (wordLength)*26 + (wordLength - 1) * 26 + (wordLength - 2) + (wordLength - 1);
 
-    int thirdResultAmount = FirstResultsAmount;
-
     int ResultsAmount = FirstResultsAmount + SecondResultsAmount;
 
     TablaHash PartialResultsTable = new_dict((int)(ResultsAmount / 0.7));
 
-    for (int step = 0; step < MAX_STEPS && (*correctWordsAmount) < MAX_WORDS; step++)
-        for (int firstFunction = 0; firstFunction < 5 && (*correctWordsAmount) < MAX_WORDS; firstFunction++)
-        {
-            (*proccess[firstFunction])(word, wordLength, results, correctWordsAmount, PartialResultsTable, table, step);
-        }
+    dict_entry_s **partialResults = malloc(sizeof(dict_entry_s *) * ResultsAmount);
+    for (int i = 0; i < SecondResultsAmount; i++)
+        partialResults[i] = NULL;
 
+    for (int step = 0; step < 2 && (*correctWordsAmount) < MAX_WORDS; step++)
+    {
+        *contador = 0;
+        if (step == 0)
+            for (int firstFunction = 0; firstFunction < 5 && (*correctWordsAmount) < MAX_WORDS; firstFunction++)
+            {
+                (*proccess[firstFunction])(word, wordLength, results, correctWordsAmount, PartialResultsTable, table, partialResults, contador);
+            }
+
+        else
+            for (int i = 0; i < SecondResultsAmount && partialResults[i]; i++)
+            {
+                int partialLength = strlen(partialResults[i]->key);
+                for (int firstFunction = 0; firstFunction < 5 && (*correctWordsAmount) < MAX_WORDS; firstFunction++)
+                {
+                    (*proccess[firstFunction])(partialResults[i]->key, partialLength, results, correctWordsAmount, PartialResultsTable, table, partialResults, contador);
+                }
+            }
+    }
     dict_destroy(PartialResultsTable);
     free(proccess);
     free(correctWordsAmount);

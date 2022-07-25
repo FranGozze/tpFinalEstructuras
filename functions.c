@@ -31,7 +31,7 @@ func *arrayOfFunctions()
 }
 
 void change_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount,
-                   TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, int *contador)
+                   TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, unsigned int *contador)
 {
     for (int i = 0; i < wordLength && (*correctWordsAmount) < MAX_WORDS; i++)
     {
@@ -58,7 +58,7 @@ void change_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
 }
 
 void swap_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount,
-                 TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, int *contador)
+                 TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, unsigned int *contador)
 {
     for (int i = 0; i < wordLength - 1 && (*correctWordsAmount) < MAX_WORDS; i++)
     {
@@ -84,7 +84,7 @@ void swap_letter(char *word, int wordLength, dict_entry_s *results[], int *corre
 }
 
 void delete_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount,
-                   TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, int *contador)
+                   TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, unsigned int *contador)
 {
     for (int i = 0; i < wordLength && (*correctWordsAmount) < MAX_WORDS; i++)
     {
@@ -124,7 +124,7 @@ char *addInPosition(char *str, int strSize, char c, unsigned num)
 }
 
 void insert_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount,
-                   TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, int *contador)
+                   TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, unsigned int *contador)
 {
     for (int i = 0; i < wordLength + 1; i++)
     {
@@ -148,7 +148,7 @@ void insert_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
 }
 
 void separate_letter(char *word, int wordLength, dict_entry_s *results[], int *correctWordsAmount,
-                     TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, int *contador)
+                     TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, unsigned int *contador)
 {
     char *aux = word;
     for (int i = 0; i + 1 < wordLength; i++)
@@ -178,22 +178,26 @@ void corrections(char *word, int wordLength, TablaHash table, dict_entry_s *resu
 {
     int *correctWordsAmount = malloc(sizeof(int));
     *correctWordsAmount = 0;
-    int *contador = malloc(sizeof(int));
+    unsigned int *contador = malloc(sizeof(int));
 
     func *proccess = arrayOfFunctions();
-    unsigned FirstResultsAmount = (wordLength + 1) * 26 + wordLength * 26 + (wordLength - 1) + wordLength;
-    // en segundo paso change_letter y swap_letter
-    unsigned SecondResultsAmount = FirstResultsAmount * 2;
-    // caso insert en segundo paso
-    SecondResultsAmount += (wordLength + 2) * 26 + (wordLength + 1) * 26 + (wordLength) + wordLength + 1;
+    //                            insert_letter           change_letter       swap_letter       delete_letter
+    unsigned int FirstResultsAmount = (wordLength + 1) * 26 + wordLength * 26 + (wordLength - 1) + wordLength;
+
+    // en segundo paso  swap_letter
+    unsigned int SecondResultsAmount = (FirstResultsAmount - ((wordLength + 1) * 26) - wordLength) * (wordLength - 1) + (wordLength + 1) * 26 * wordLength + wordLength * (wordLength - 2);
+    // caso insert en segundo paso          Resto las palabras que tiene 1 letra mas y 1 menos                  Palabras con 1 letra mas                        palabras con 1 letra menos
+    SecondResultsAmount += (FirstResultsAmount - ((wordLength + 1) * 26) - wordLength) * (wordLength + 1) * 26 + (wordLength + 1) * 26 * (wordLength + 2) * 26 + (wordLength) * (wordLength)*26;
     // caso delete
-    SecondResultsAmount += (wordLength)*26 + (wordLength - 1) * 26 + (wordLength - 2) + (wordLength - 1);
+    SecondResultsAmount += (FirstResultsAmount - ((wordLength + 1) * 26) - wordLength) * wordLength + (wordLength + 1) * 26 * (wordLength + 1) + wordLength * (wordLength - 1);
+    // caso change
+    SecondResultsAmount += (FirstResultsAmount - ((wordLength + 1) * 26) - wordLength) * (wordLength)*26 + (wordLength + 1) * 26 * (wordLength + 1) * 26 + (wordLength) * (wordLength - 1) * 26;
 
     int ResultsAmount = FirstResultsAmount + SecondResultsAmount;
 
     TablaHash PartialResultsTable = new_dict((int)(ResultsAmount / 0.7));
 
-    dict_entry_s **partialResults = malloc(sizeof(dict_entry_s *) * ResultsAmount);
+    dict_entry_s **partialResults = malloc(sizeof(dict_entry_s *) * SecondResultsAmount);
     for (int i = 0; i < SecondResultsAmount; i++)
         partialResults[i] = NULL;
 

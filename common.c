@@ -29,6 +29,7 @@ void text(char *texPath, TablaHash dict)
     FILE *file = fopen(texPath, "rb");
     FILE *output = fopen("salida.txt", "wb");
     char buff[255];
+    int linea = 1;
     TablaHash table = new_correct_dict(WORDS_SIZE);
     while (fscanf(file, "%[^,. \n] %*[,. \n]", buff) != EOF)
     {
@@ -46,12 +47,13 @@ void text(char *texPath, TablaHash dict)
         {
             corrections_free(word);
         }
-
+        if (find->corrections[0])
+            fprintf(output, "\nPalabra: %s\n", find->entry->key);
         for (int i = 0; i < 5; i++)
             if (find->corrections[i])
             {
                 // printf("%s\n", find->corrections[i]->key);
-                fprintf(output, "%s\n", find->corrections[i]->key);
+                fprintf(output, " %s\n", find->corrections[i]->key);
             }
     }
     tablahash_destruir(table);

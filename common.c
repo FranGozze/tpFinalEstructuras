@@ -7,7 +7,7 @@
 #include "correctWord.h"
 #include "functions.h"
 
-#define HASHSIZE 886987
+#define HASHSIZE 1241782
 #define WORDS_SIZE 4096
 
 TablaHash readDictionary(char *dictPath)
@@ -17,7 +17,7 @@ TablaHash readDictionary(char *dictPath)
     TablaHash table = new_dict(HASHSIZE);
     while (fscanf(file, "%s", buff) != EOF)
     {
-        dict_entry_s *entry = create_entry(buff);
+        dict_entry_s *entry = create_entry_with_copy(buff, strlen(buff));
         dict_add(table, entry);
     }
     fclose(file);
@@ -33,28 +33,31 @@ void text(char *texPath, TablaHash dict)
     TablaHash table = new_correct_dict(WORDS_SIZE);
     while (fscanf(file, "%[^,. \n] %*[,. \n]", buff) != EOF)
     {
-        dict_entry_s *entry = create_entry(buff);
-        correctWord *word = create_correction(entry);
-        correctWord *find = tablahash_buscar(table, word);
-        if (!find)
+        dict_entry_s *entry = create_entry_with_copy(buff, strlen(buff));
+        if (!dict_find(dict, entry))
         {
-            corrections(buff, strlen(buff), dict, word->corrections);
-
-            tablahash_insertar(table, word);
-            find = word;
-        }
-        else
-        {
-            corrections_free(word);
-        }
-        if (find->corrections[0])
-            fprintf(output, "\nPalabra: %s\n", find->entry->key);
-        for (int i = 0; i < 5; i++)
-            if (find->corrections[i])
+            correctWord *word = create_correction(entry);
+            correctWord *find = tablahash_buscar(table, word);
+            if (!find)
             {
-                // printf("%s\n", find->corrections[i]->key);
-                fprintf(output, " %s\n", find->corrections[i]->key);
+                corrections(buff, strlen(buff), dict, word->corrections);
+
+                tablahash_insertar(table, word);
+                find = word;
             }
+            else
+            {
+                corrections_free(word);
+            }
+            if (find->corrections[0])
+                fprintf(output, "\nPalabra: %s\n", find->entry->key);
+            for (int i = 0; i < 5; i++)
+                if (find->corrections[i])
+                {
+                    // printf("%s\n", find->corrections[i]->key);
+                    fprintf(output, " %s\n", find->corrections[i]->key);
+                }
+        }
     }
     tablahash_destruir(table);
 }

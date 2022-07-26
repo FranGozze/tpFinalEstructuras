@@ -5,10 +5,12 @@
 typedef struct dict_entry_s
 {
     char *key;
+    int keyLength;
     int hash;
 } dict_entry_s;
 
-dict_entry_s *create_entry(char *key);
+dict_entry_s *create_entry_with_copy(char *key, int keyLength);
+dict_entry_s *create_entry_with_reference(char *key, int keyLength);
 
 unsigned dict_hash(dict_entry_s *entry);
 void dict_free(dict_entry_s *entry);

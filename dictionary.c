@@ -4,11 +4,20 @@
 #include "tablahash.h"
 #include "dictionary.h"
 
-dict_entry_s *create_entry(char *key)
+dict_entry_s *create_entry_with_copy(char *key, int keyLength)
 {
     dict_entry_s *entry = malloc(sizeof(dict_entry_s));
-    entry->key = malloc(sizeof(char) * strlen(key) + 1);
+    entry->key = malloc(sizeof(char) * keyLength + 1);
     strcpy(entry->key, key);
+    entry->keyLength = keyLength;
+    entry->hash = dict_hash(entry);
+    return entry;
+}
+dict_entry_s *create_entry_with_reference(char *key, int keyLength)
+{
+    dict_entry_s *entry = malloc(sizeof(dict_entry_s));
+    entry->key = key;
+    entry->keyLength = keyLength;
     entry->hash = dict_hash(entry);
     return entry;
 }
@@ -16,6 +25,7 @@ unsigned dict_hash(dict_entry_s *entry)
 {
     return KRHash(entry->key);
 }
+unsigned hash(dict_entry_s *entry) { return entry->hash; }
 void dict_free(dict_entry_s *entry)
 {
     free(entry->key);
@@ -27,7 +37,7 @@ int dict_cmp(dict_entry_s *entry1, dict_entry_s *entry2)
 }
 dict_entry_s *dict_copy(dict_entry_s *entry)
 {
-    dict_entry_s *copy = create_entry(entry->key);
+    dict_entry_s *copy = create_entry_with_copy(entry->key, entry->keyLength);
     return copy;
 }
 
@@ -46,5 +56,5 @@ void dict_destroy(TablaHash table)
 
 TablaHash new_dict(int size)
 {
-    return tablahash_crear(size, (FuncionCopiadora)dict_copy, (FuncionComparadora)dict_cmp, (FuncionDestructora)dict_free, (FuncionHash)dict_hash);
+    return tablahash_crear(size, (FuncionCopiadora)dict_copy, (FuncionComparadora)dict_cmp, (FuncionDestructora)dict_free, (FuncionHash)hash);
 }

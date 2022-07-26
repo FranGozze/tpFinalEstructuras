@@ -12,7 +12,6 @@ int main()
 {
     TablaHash table = readDictionary("diccionario.txt");
     dict_entry_s *results[5] = {NULL};
-
     text("input.txt", table);
     dict_destroy(table);
     // dict_entry_s *entry = create_entry("aa");

@@ -1,0 +1,322 @@
+
+Palabra: Lorem
+ ore
+ orea
+ oree
+ oren
+ oreo
+
+Palabra: ipsum
+ pum
+ ipsi
+ insuma
+ insume
+ insumi
+
+Palabra: sit
+ si
+ bit
+ set
+ sic
+ sij
+
+Palabra: amet
+ ame
+ amel
+ amen
+ ames
+ et
+
+Palabra: consectetur
+ conecte tu
+ conecte jur
+ conecte mur
+ conecte sur
+ conecte ter
+
+Palabra: adipiscing
+ di piscina
+ ad piscina
+ ahi piscina
+ aji piscina
+ ali piscina
+
+Palabra: elit
+ elite
+ bit
+ lia
+ lid
+ lie
+
+Palabra: Nullam
+ aulla
+ bulla
+ fulla
+ hulla
+ mulla
+
+Palabra: sit
+ si
+ bit
+ set
+ sic
+ sij
+
+Palabra: amet
+ ame
+ amel
+ amen
+ ames
+ et
+
+Palabra: velit
+ velis
+ veliz
+ velite
+ elite
+ veia
+
+Palabra: faucibus
+ uci bus
+ luci bus
+ autobus
+ auca bus
+ aduci bus
+
+Palabra: ultrices
+ trices
+ larices
+ nutrices
+ ultimes
+ al trices
+
+Palabra: diam
+ dia
+ dima
+ dial
+ dias
+ diay
+
+Palabra: at
+ ta
+ et
+ ad
+ ah
+ aj
+
+Palabra: laoreet
+ loree
+ loreen
+ lorees
+ la oree
+ lauree
+
+Palabra: neque
+ ne que
+ beque
+ deque
+ jeque
+ peque
+
+Palabra: Donec
+ once
+ onece
+ oneci
+ pone
+ sone
+
+Palabra: nunc
+ nunca
+ un
+ una
+ une
+ uni
+
+Palabra: eu
+ bu
+ cu
+ fu
+ ju
+ mu
+
+Palabra: augue
+ ague
+ auge
+ fugue
+ jugue
+ mugue
+
+Palabra: sodales
+ soda les
+ codales
+ modales
+ nodales
+ podales
+
+Palabra: rutrum
+ rumrum
+ rurru
+ quorum
+ rumrums
+ runrun
+
+Palabra: In
+ en
+ in
+ un
+ na
+ ne
+
+Palabra: sollicitudin
+ solicitud in
+ solicitud
+ solicitud ni
+ solicita din
+ solicitad in
+
+Palabra: eleifend
+ lei fenda
+ lei fendi
+ eliden
+ eligen
+ elijen
+
+Palabra: placerat
+ placera
+ placeran
+ placeras
+ lacera
+ lacerad
+
+Palabra: eget
+ et
+ ge
+ jet
+ set
+ gea
+
+Palabra: Suspendisse
+ suspendiese
+ suspendiste
+ bus pendiese
+ bus pendiste
+ cus pendiese
+
+Palabra: mollis
+ mol lis
+ mullis
+ molais
+ moleis
+ mollas
+
+Palabra: vestibulum
+ vestibulo
+ vestibulos
+ vesti ulua
+ vesti bum
+ vesti bula
+
+Palabra: dictum
+ ictus
+ dicta
+ dicte
+ dicto
+ rictus
+
+Palabra: Phasellus
+ ha sellas
+ has ellas
+ ha selles
+ has elles
+ ha sellos
+
+Palabra: placerat
+ placera
+ placeran
+ placeras
+ lacera
+ lacerad
+
+Palabra: faucibus
+ uci bus
+ luci bus
+ autobus
+ auca bus
+ aduci bus
+
+Palabra: In
+ en
+ in
+ un
+ na
+ ne
+
+Palabra: hac
+ ha
+ tac
+ han
+ hao
+ has
+
+Palabra: habitasse
+ habitas se
+ habitase
+ habitases
+ habitaste
+ abitas se
+
+Palabra: dictumst
+ ictus
+ dictas
+ dictes
+ dictase
+ dictaste
+
+Palabra: Mauris
+ cauris
+ buris
+ curis
+ guris
+ huris
+
+Palabra: tristique
+ tris tique
+ rustique
+ critique
+ trisque
+ triseque
+
+Palabra: lorem
+ lorea
+ loree
+ loreo
+ lores
+ ore
+
+Palabra: nec
+ ne
+ nea
+ nen
+ neo
+ ce
+
+Palabra: erat
+ era
+ erad
+ eral
+ eran
+ erar
+
+Palabra: suscipit
+ incipit
+ susidio
+ sus ipil
+ suscita
+ suscite
+
+Palabra: faucibus
+ uci bus
+ luci bus
+ autobus
+ auca bus
+ aduci bus

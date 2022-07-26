@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "tablahash.h"
 #include "dictionary.h"
 
@@ -8,7 +9,9 @@ dict_entry_s *create_entry_with_copy(char *key, int keyLength)
 {
     dict_entry_s *entry = malloc(sizeof(dict_entry_s));
     entry->key = malloc(sizeof(char) * keyLength + 1);
-    strcpy(entry->key, key);
+    for (int i = 0; i < keyLength; i++)
+        entry->key[i] = tolower(key[i]);
+    entry->key[keyLength] = '\0';
     entry->keyLength = keyLength;
     entry->hash = dict_hash(entry);
     return entry;

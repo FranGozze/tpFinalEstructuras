@@ -26,12 +26,12 @@ TablaHash readDictionary(char *dictPath)
 
 void text(char *texPath, TablaHash dict)
 {
-    FILE *file = fopen(texPath, "rb");
+    FILE *input = fopen(texPath, "rb");
     FILE *output = fopen("salida.txt", "wb");
     char buff[255];
     int linea = 1;
     TablaHash table = new_correct_dict(WORDS_SIZE);
-    while (fscanf(file, "%[^,. \n] %*[,. \n]", buff) != EOF)
+    while (fscanf(input, "%[^,. \n] %*[,. \n]", buff) != EOF)
     {
         dict_entry_s *entry = create_entry_with_copy(buff, strlen(buff));
         if (!dict_find(dict, entry))
@@ -41,7 +41,6 @@ void text(char *texPath, TablaHash dict)
             if (!find)
             {
                 corrections(buff, strlen(buff), dict, word->corrections);
-
                 tablahash_insertar(table, word);
                 find = word;
             }
@@ -50,14 +49,17 @@ void text(char *texPath, TablaHash dict)
                 corrections_free(word);
             }
             if (find->corrections[0])
-                fprintf(output, "\nPalabra: %s\n", find->entry->key);
+                fprintf(output, "\nPalabra: %s  \n", find->entry->key);
             for (int i = 0; i < 5; i++)
                 if (find->corrections[i])
                 {
-                    // printf("%s\n", find->corrections[i]->key);
                     fprintf(output, " %s\n", find->corrections[i]->key);
                 }
         }
+        else
+            dict_free(entry);
     }
     tablahash_destruir(table);
+    fclose(output);
+    fclose(input);
 }

@@ -6,5 +6,5 @@ run: main.c slist.c tablahash.c dictionary.c common.c functions.c correctWord.c
 val: main.c slist.c tablahash.c dictionary.c common.c functions.c correctWord.c
 	- clear	
 	- gcc main.c  slist.c tablahash.c dictionary.c common.c  functions.c correctWord.c -o main
-	- valgrind  --track-origins=yes --leak-check=full ./main
+	- valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./main
 	-rm main

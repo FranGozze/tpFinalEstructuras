@@ -21,12 +21,11 @@ unsigned corrections_hash(correctWord *word)
 }
 void corrections_free(correctWord *word)
 {
-    free(word->entry->key);
-    free(word->entry);
+    dict_free(word->entry);
     for (int i = 0; i < 5; i++)
         if (word->corrections[i])
             dict_free(word->corrections[i]);
-
+    free(word->corrections);
     free(word);
 }
 int corrections_cmp(correctWord *word, correctWord *word2)

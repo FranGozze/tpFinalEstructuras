@@ -44,17 +44,19 @@ void change_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
             dict_entry_s *entry = create_entry_with_copy(copy, wordLength);
             if (!dict_find(partialResultsTable, entry))
             {
-                if (step < 2)
+
+                if (dict_find(table, entry))
+                {
+                    dict_add(partialResultsTable, entry);
+                    results[(*correctWordsAmount)++] = dict_copy(entry);
+                }
+                else if (step < 2)
                 {
                     dict_add(partialResultsTable, entry);
                     partialResults[(*contador)++] = entry;
                 }
-                if (dict_find(table, entry))
-                {
-                    if (step == 2)
-                        dict_add(partialResultsTable, entry);
-                    results[(*correctWordsAmount)++] = dict_copy(entry);
-                }
+                else
+                    dict_free(entry);
             }
             else
                 dict_free(entry);
@@ -76,17 +78,18 @@ void swap_letter(char *word, int wordLength, dict_entry_s *results[], int *corre
         dict_entry_s *entry = create_entry_with_copy(copy, wordLength);
         if (!dict_find(partialResultsTable, entry))
         {
-            if (step < 2)
+            if (dict_find(table, entry))
+            {
+                dict_add(partialResultsTable, entry);
+                results[(*correctWordsAmount)++] = dict_copy(entry);
+            }
+            else if (step < 2)
             {
                 dict_add(partialResultsTable, entry);
                 partialResults[(*contador)++] = entry;
             }
-            if (dict_find(table, entry))
-            {
-                if (step == 2)
-                    dict_add(partialResultsTable, entry);
-                results[(*correctWordsAmount)++] = dict_copy(entry);
-            }
+            else
+                dict_free(entry);
         }
         else
             dict_free(entry);
@@ -100,7 +103,7 @@ void delete_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
 {
     for (int i = 0; i < wordLength && (*correctWordsAmount) < MAX_WORDS; i++)
     {
-        char *copy = malloc(sizeof(char) * wordLength);
+        char *copy = malloc(sizeof(char) * wordLength + 1);
         for (int j = 0; j < wordLength; j++)
             if (j < i)
                 copy[j] = word[j];
@@ -113,17 +116,18 @@ void delete_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
         if (!dict_find(partialResultsTable, entry))
         {
 
-            if (step < 2)
+            if (dict_find(table, entry))
+            {
+                dict_add(partialResultsTable, entry);
+                results[(*correctWordsAmount)++] = dict_copy(entry);
+            }
+            else if (step < 2)
             {
                 dict_add(partialResultsTable, entry);
                 partialResults[(*contador)++] = entry;
             }
-            if (dict_find(table, entry))
-            {
-                if (step == 2)
-                    dict_add(partialResultsTable, entry);
-                results[(*correctWordsAmount)++] = dict_copy(entry);
-            }
+            else
+                dict_free(entry);
         }
         else
             dict_free(entry);
@@ -153,17 +157,18 @@ void insert_letter(char *word, int wordLength, dict_entry_s *results[], int *cor
             dict_entry_s *entry = create_entry_with_reference(copy, wordLength + 1);
             if (!dict_find(partialResultsTable, entry))
             {
-                if (step < 2)
+                if (dict_find(table, entry))
+                {
+                    dict_add(partialResultsTable, entry);
+                    results[(*correctWordsAmount)++] = dict_copy(entry);
+                }
+                else if (step < 2)
                 {
                     dict_add(partialResultsTable, entry);
                     partialResults[(*contador)++] = entry;
                 }
-                if (dict_find(table, entry))
-                {
-                    if (step == 2)
-                        dict_add(partialResultsTable, entry);
-                    results[(*correctWordsAmount)++] = dict_copy(entry);
-                }
+                else
+                    dict_free(entry);
             }
             else
                 dict_free(entry);
@@ -175,9 +180,9 @@ void separate_letter(char *word, int wordLength, dict_entry_s *results[], int *c
                      TablaHash partialResultsTable, TablaHash table, dict_entry_s **partialResults, unsigned int *contador, int step)
 {
     char *aux = word;
-    for (int i = 0; i + 1 < wordLength; i++)
+    for (int i = 0; i + 1 < wordLength && (*correctWordsAmount) < MAX_WORDS; i++)
     {
-        char *copy1 = malloc(sizeof(char) * wordLength + 1);
+        char *copy1 = malloc(sizeof(char) * wordLength + 2);
         char *copy2;
         copy2 = aux + (i + 1);
         strncpy(copy1, aux, i + 1);
@@ -193,6 +198,8 @@ void separate_letter(char *word, int wordLength, dict_entry_s *results[], int *c
             dict_entry_s *result = create_entry_with_reference(copy1, wordLength + 1);
             results[(*correctWordsAmount)++] = result;
         }
+        else
+            free(copy1);
         dict_free(entry1);
         dict_free(entry2);
     }

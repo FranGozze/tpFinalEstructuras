@@ -1,10 +1,10 @@
-#include "tablahash.h"
+#include "Headers/tablahash.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "slist.h"
+#include "Headers/slist.h"
 
 /**
  * Casillas en la que almacenaremos los datos de la tabla hash.

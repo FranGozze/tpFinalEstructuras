@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tablahash.h"
-#include "dictionary.h"
-#include "correctWord.h"
+#include "Headers/tablahash.h"
+#include "Headers/dictionary.h"
+#include "Headers/correctWord.h"
 
 correctWord *create_correction(dict_entry_s *entry)
 {

@@ -49,11 +49,11 @@ Palabra: elit
  lie
 
 Palabra: nullam  
+ nula
  nulas
  aulla
  bulla
  fulla
- hulla
 
 Palabra: sit  
  si
@@ -119,11 +119,11 @@ Palabra: neque
  peque
 
 Palabra: donec  
+ done
  donen
  doneo
  dones
  once
- onece
 
 Palabra: nunc  
  nunca
@@ -157,8 +157,8 @@ Palabra: rutrum
  rumrum
  rurru
  quorum
- runrun
  rumrums
+ runrun
 
 Palabra: sollicitudin  
  solicitud in
@@ -191,7 +191,7 @@ Palabra: eget
 Palabra: suspendisse  
  suspendiese
  suspendiste
- Suspendi se
+ suspendi se
  suspendias
  suspendi ses
 

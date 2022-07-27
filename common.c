@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tablahash.h"
-#include "dictionary.h"
-#include "common.h"
-#include "correctWord.h"
-#include "functions.h"
+
+#include "Headers/tablahash.h"
+#include "Headers/dictionary.h"
+#include "Headers/common.h"
+#include "Headers/correctWord.h"
+#include "Headers/functions.h"
 
 #define HASHSIZE 1241782
 #define WORDS_SIZE 4096
@@ -40,7 +41,7 @@ void text(char *texPath, TablaHash dict)
             correctWord *find = tablahash_buscar(table, word);
             if (!find)
             {
-                corrections(buff, strlen(buff), dict, word->corrections);
+                corrections(word, dict);
                 tablahash_insertar(table, word);
                 find = word;
             }

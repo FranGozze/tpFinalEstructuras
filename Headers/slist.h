@@ -19,11 +19,6 @@ typedef SNodo *SList;
 SList list_create();
 
 /**
- * Destruccion de la lista.
- */
-void list_destroy(SList list, functionListFree function);
-
-/**
  *
  */
 void list_push(SList *list, void *data);

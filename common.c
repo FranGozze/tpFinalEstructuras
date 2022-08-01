@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "Headers/tablahash.h"
 #include "Headers/dictionary.h"
@@ -16,6 +17,11 @@ TablaHash readDictionary(char *dictPath)
     FILE *file = fopen(dictPath, "rb");
     char buff[255];
     TablaHash table = new_dict(HASHSIZE);
+    if (!file)
+    {
+        fclose(file);
+        exit(1);
+    }
     while (fscanf(file, "%s", buff) != EOF)
     {
         dict_entry_s *entry = create_entry_with_copy(buff, strlen(buff));
@@ -30,37 +36,61 @@ void text(char *texPath, TablaHash dict)
     FILE *input = fopen(texPath, "rb");
     FILE *output = fopen("salida.txt", "wb");
     char buff[255];
-    int linea = 1;
+    int linea = 1, posicion = 0, ban = 1;
     TablaHash table = new_correct_dict(WORDS_SIZE);
-    while (fscanf(input, "%[^,. \n] %*[,. \n]", buff) != EOF)
+
+    while (ban)
     {
-        dict_entry_s *entry = create_entry_with_copy(buff, strlen(buff));
-        if (!dict_find(dict, entry))
+        buff[posicion] = fgetc(input);
+        if (isalpha(buff[posicion]))
+            buff[posicion++] = tolower(buff[posicion]);
+
+        else if (buff[posicion] == ' ' || buff[posicion] == '\n' || buff[posicion] == EOF)
         {
-            correctWord *word = create_correction(entry);
-            correctWord *find = tablahash_buscar(table, word);
-            if (!find)
+            if (buff[posicion] == EOF)
+                ban = 0;
+
+            if (buff[posicion] == '\n')
+                linea++;
+            buff[posicion] = '\0';
+            posicion = 0;
+            dict_entry_s *entry = create_entry_with_copy(buff, strlen(buff));
+            if (!dict_find(dict, entry))
             {
-                corrections(word, dict);
-                tablahash_insertar(table, word);
-                find = word;
+                correctWord *word = create_correction(entry);
+                correctWord *find = find_tablahash(table, word);
+                if (!find)
+                {
+                    corrections(word, dict);
+                    insert_tablehash(table, word);
+                    if (word->corrections[0])
+                    {
+                        fprintf(output, "Linea %d, '%s' no esta en el diccionario.\nQuizas quiso decir: ", linea, word->entry->key);
+                        for (int i = 0; i < 5; i++)
+                        {
+                            if (word->corrections[i])
+                            {
+                                fprintf(output, "%s", word->corrections[i]->key);
+                            }
+                            if (word->corrections[i + 1])
+                                fprintf(output, ", ");
+                        }
+                        fprintf(output, "\n");
+                    }
+                    else
+                        fprintf(output, "\nNo se encontraron correciones para la palabra: %s  \n", word->entry->key);
+                }
+                else
+                {
+                    corrections_free(word);
+                }
             }
             else
-            {
-                corrections_free(word);
-            }
-            if (find->corrections[0])
-                fprintf(output, "\nPalabra: %s  \n", find->entry->key);
-            for (int i = 0; i < 5; i++)
-                if (find->corrections[i])
-                {
-                    fprintf(output, " %s\n", find->corrections[i]->key);
-                }
+                dict_free(entry);
         }
-        else
-            dict_free(entry);
     }
-    tablahash_destruir(table);
+
+    destroy_tablehash(table);
     fclose(output);
     fclose(input);
 }

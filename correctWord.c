@@ -9,15 +9,15 @@ correctWord *create_correction(dict_entry_s *entry)
 {
     correctWord *word = malloc(sizeof(correctWord));
     word->entry = entry;
-    word->corrections = malloc(sizeof(dict_entry_s *) * 5);
-    for (int i = 0; i < 5; i++)
+    word->corrections = malloc(sizeof(dict_entry_s *) * 6);
+    for (int i = 0; i < 6; i++)
         word->corrections[i] = NULL;
 
     return word;
 }
 unsigned corrections_hash(correctWord *word)
 {
-    return KRHash(word->entry->key);
+    return word->entry->hash;
 }
 void corrections_free(correctWord *word)
 {
@@ -40,10 +40,10 @@ correctWord *corrections_copy(correctWord *word)
 
 int corrections_find(TablaHash table, correctWord *entry)
 {
-    return tablahash_buscar(table, entry) ? 1 : 0;
+    return find_tablahash(table, entry) ? 1 : 0;
 }
 
 TablaHash new_correct_dict(int size)
 {
-    return tablahash_crear(size, (FuncionCopiadora)corrections_copy, (FuncionComparadora)corrections_cmp, (FuncionDestructora)corrections_free, (FuncionHash)corrections_hash);
+    return create_tablehash(size, (FuncionCopiadora)corrections_copy, (FuncionComparadora)corrections_cmp, (FuncionDestructora)corrections_free, (FuncionHash)corrections_hash);
 }

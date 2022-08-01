@@ -12,22 +12,23 @@ dict_entry_s *create_entry_with_copy(char *key, int keyLength)
         entry->key[i] = tolower(key[i]);
     entry->key[keyLength] = '\0';
     entry->keyLength = keyLength;
-    entry->hash = dict_hash(entry);
+    entry->hash = KRHash(entry->key);
     return entry;
 }
 dict_entry_s *create_entry_with_reference(char *key, int keyLength)
 {
     dict_entry_s *entry = malloc(sizeof(dict_entry_s));
+    // Por como se usa esta funcion, el string tiene todas las letras en minuscula
     entry->key = key;
     entry->keyLength = keyLength;
-    entry->hash = dict_hash(entry);
+    entry->hash = KRHash(entry->key);
     return entry;
 }
 unsigned dict_hash(dict_entry_s *entry)
 {
-    return KRHash(entry->key);
+    return entry->hash;
 }
-unsigned hash(dict_entry_s *entry) { return entry->hash; }
+
 void dict_free(dict_entry_s *entry)
 {
     free(entry->key);
@@ -45,18 +46,18 @@ dict_entry_s *dict_copy(dict_entry_s *entry)
 
 int dict_find(TablaHash table, dict_entry_s *entry)
 {
-    return tablahash_buscar(table, entry) ? 1 : 0;
+    return find_tablahash(table, entry) ? 1 : 0;
 }
 void dict_add(TablaHash table, dict_entry_s *entry)
 {
-    tablahash_insertar(table, entry);
+    insert_tablehash(table, entry);
 }
 void dict_destroy(TablaHash table)
 {
-    tablahash_destruir(table);
+    destroy_tablehash(table);
 }
 
 TablaHash new_dict(int size)
 {
-    return tablahash_crear(size, (FuncionCopiadora)dict_copy, (FuncionComparadora)dict_cmp, (FuncionDestructora)dict_free, (FuncionHash)hash);
+    return create_tablehash(size, (FuncionCopiadora)dict_copy, (FuncionComparadora)dict_cmp, (FuncionDestructora)dict_free, (FuncionHash)dict_hash);
 }

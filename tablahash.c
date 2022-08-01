@@ -21,9 +21,9 @@ typedef struct
 /**
  * Crea una nueva tabla hash vacia, con la capacidad dada.
  */
-TablaHash tablahash_crear(unsigned capacidad, FuncionCopiadora copia,
-                          FuncionComparadora comp, FuncionDestructora destr,
-                          FuncionHash hash)
+TablaHash create_tablehash(unsigned capacidad, FuncionCopiadora copia,
+                           FuncionComparadora comp, FuncionDestructora destr,
+                           FuncionHash hash)
 {
 
   // Pedimos memoria para la estructura principal y las casillas.
@@ -60,7 +60,7 @@ int tablahash_capacidad(TablaHash tabla) { return tabla->capacidad; }
 /**
  * Destruye la tabla.
  */
-void tablahash_destruir(TablaHash tabla)
+void destroy_tablehash(TablaHash tabla)
 {
 
   // Destruir cada uno de los datos.
@@ -84,7 +84,7 @@ void tablahash_destruir(TablaHash tabla)
  * Inserta un dato en la tabla, o lo reemplaza si ya se encontraba.
  * IMPORTANTE: La implementacion no maneja colisiones.
  */
-void tablahash_insertar(TablaHash tabla, void *dato)
+void insert_tablehash(TablaHash tabla, void *dato)
 {
   unsigned idx = tabla->hash(dato) % tabla->capacidad;
   tabla->numElems++;
@@ -97,7 +97,7 @@ void tablahash_insertar(TablaHash tabla, void *dato)
  * Retorna el dato de la tabla que coincida con el dato dado, o NULL si el dato
  * buscado no se encuentra en la tabla.
  */
-void *tablahash_buscar(TablaHash tabla, void *dato)
+void *find_tablahash(TablaHash tabla, void *dato)
 {
   unsigned idx = tabla->hash(dato) % tabla->capacidad;
   if (tabla->elems[idx] == NULL)

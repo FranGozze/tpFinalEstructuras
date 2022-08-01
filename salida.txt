@@ -1,308 +1,78 @@
-
-Palabra: lorem  
- lorea
- loree
- loreo
- lores
- ore
-
-Palabra: ipsum  
- pum
- ipsi
- insuma
- insume
- insumi
-
-Palabra: sit  
- si
- bit
- set
- sic
- sij
-
-Palabra: amet  
- ame
- amel
- amen
- ames
- et
-
-Palabra: consectetur  
- conecte tu
- conecte jur
- conecte mur
- conecte sur
- conecte ter
-
-Palabra: adipiscing  
- di piscina
- ad piscina
- ahi piscina
- aji piscina
- ali piscina
-
-Palabra: elit  
- elite
- bit
- lia
- lid
- lie
-
-Palabra: nullam  
- nula
- nulas
- aulla
- bulla
- fulla
-
-Palabra: sit  
- si
- bit
- set
- sic
- sij
-
-Palabra: amet  
- ame
- amel
- amen
- ames
- et
-
-Palabra: velit  
- velis
- veliz
- velite
- elite
- veia
-
-Palabra: faucibus  
- uci bus
- luci bus
- autobus
- auca bus
- aduci bus
-
-Palabra: ultrices  
- trices
- larices
- nutrices
- ultimes
- al trices
-
-Palabra: diam  
- dia
- dima
- dial
- dias
- diay
-
-Palabra: at  
- ta
- et
- ad
- ah
- aj
-
-Palabra: laoreet  
- loree
- loreen
- lorees
- la oree
- lauree
-
-Palabra: neque  
- ne que
- beque
- deque
- jeque
- peque
-
-Palabra: donec  
- done
- donen
- doneo
- dones
- once
-
-Palabra: nunc  
- nunca
- un
- una
- une
- uni
-
-Palabra: eu  
- bu
- cu
- fu
- ju
- mu
-
-Palabra: augue  
- ague
- auge
- fugue
- jugue
- mugue
-
-Palabra: sodales  
- soda les
- codales
- modales
- nodales
- podales
-
-Palabra: rutrum  
- rumrum
- rurru
- quorum
- rumrums
- runrun
-
-Palabra: sollicitudin  
- solicitud in
- solicitud
- solicitud ni
- solicita din
- solicitad in
-
-Palabra: eleifend  
- lei fenda
- lei fendi
- eliden
- eligen
- elijen
-
-Palabra: placerat  
- placera
- placeran
- placeras
- lacera
- lacerad
-
-Palabra: eget  
- et
- ge
- jet
- set
- gea
-
-Palabra: suspendisse  
- suspendiese
- suspendiste
- suspendi se
- suspendias
- suspendi ses
-
-Palabra: mollis  
- mol lis
- mullis
- molais
- moleis
- mollas
-
-Palabra: vestibulum  
- vestibulo
- vestibulos
- vesti ulua
- vesti bum
- vesti bula
-
-Palabra: dictum  
- ictus
- dicta
- dicte
- dicto
- rictus
-
-Palabra: phasellus  
- ha sellas
- has ellas
- ha selles
- has elles
- ha sellos
-
-Palabra: placerat  
- placera
- placeran
- placeras
- lacera
- lacerad
-
-Palabra: faucibus  
- uci bus
- luci bus
- autobus
- auca bus
- aduci bus
-
-Palabra: hac  
- ha
- tac
- han
- hao
- has
-
-Palabra: habitasse  
- habitas se
- habitase
- habitases
- habitaste
- abitas se
-
-Palabra: dictumst  
- ictus
- dictas
- dictes
- dictase
- dictaste
-
-Palabra: mauris  
- cauris
- maoris
- mauras
- maures
- mauros
-
-Palabra: tristique  
- tris tique
- rustique
- critique
- trisque
- triseque
-
-Palabra: lorem  
- lorea
- loree
- loreo
- lores
- ore
-
-Palabra: nec  
- ne
- nea
- nen
- neo
- ce
-
-Palabra: erat  
- era
- erad
- eral
- eran
- erar
-
-Palabra: suscipit  
- incipit
- susidio
- sus ipil
- suscita
- suscite
-
-Palabra: faucibus  
- uci bus
- luci bus
- autobus
- auca bus
- aduci bus
+Linea 1, 'lorem' no esta en el diccionario.
+Quizas quiso decir: lorea, loree, loreo, lores, ore
+Linea 1, 'ipsum' no esta en el diccionario.
+Quizas quiso decir: pum, ipsi, insuma, insume, insumi
+Linea 1, 'sit' no esta en el diccionario.
+Quizas quiso decir: si, bit, set, sic, sij
+Linea 1, 'amet' no esta en el diccionario.
+Quizas quiso decir: ame, amel, amen, ames, et
+Linea 1, 'consectetur' no esta en el diccionario.
+Quizas quiso decir: conecte tu, conecte jur, conecte mur, conecte sur, conecte ter
+Linea 1, 'adipiscing' no esta en el diccionario.
+Quizas quiso decir: di piscina, ad piscina, ahi piscina, aji piscina, ali piscina
+Linea 2, 'elit' no esta en el diccionario.
+Quizas quiso decir: elite, bit, lia, lid, lie
+Linea 2, 'nullam' no esta en el diccionario.
+Quizas quiso decir: nula, nulas, aulla, bulla, fulla
+Linea 2, 'velit' no esta en el diccionario.
+Quizas quiso decir: velis, veliz, velite, elite, veia
+Linea 2, 'faucibus' no esta en el diccionario.
+Quizas quiso decir: uci bus, luci bus, autobus, auca bus, aduci bus
+Linea 2, 'ultrices' no esta en el diccionario.
+Quizas quiso decir: trices, larices, nutrices, ultimes, al trices
+Linea 2, 'diam' no esta en el diccionario.
+Quizas quiso decir: dia, dima, dial, dias, diay
+Linea 2, 'at' no esta en el diccionario.
+Quizas quiso decir: ta, et, ad, ah, aj
+Linea 2, 'laoreet' no esta en el diccionario.
+Quizas quiso decir: loree, loreen, lorees, la oree, lauree
+Linea 3, 'neque' no esta en el diccionario.
+Quizas quiso decir: ne que, beque, deque, jeque, peque
+Linea 3, 'donec' no esta en el diccionario.
+Quizas quiso decir: done, donen, doneo, dones, once
+Linea 3, 'nunc' no esta en el diccionario.
+Quizas quiso decir: nunca, un, una, une, uni
+Linea 3, 'eu' no esta en el diccionario.
+Quizas quiso decir: bu, cu, fu, ju, mu
+Linea 3, 'augue' no esta en el diccionario.
+Quizas quiso decir: ague, auge, fugue, jugue, mugue
+Linea 3, 'sodales' no esta en el diccionario.
+Quizas quiso decir: soda les, codales, modales, nodales, podales
+Linea 4, 'rutrum' no esta en el diccionario.
+Quizas quiso decir: rumrum, rurru, quorum, rumrums, runrun
+Linea 4, 'sollicitudin' no esta en el diccionario.
+Quizas quiso decir: solicitud in, solicitud, solicitud ni, solicita din, solicitad in
+Linea 4, 'eleifend' no esta en el diccionario.
+Quizas quiso decir: lei fenda, lei fendi, eliden, eligen, elijen
+Linea 4, 'placerat' no esta en el diccionario.
+Quizas quiso decir: placera, placeran, placeras, lacera, lacerad
+Linea 5, 'eget' no esta en el diccionario.
+Quizas quiso decir: et, ge, jet, set, gea
+Linea 5, 'suspendisse' no esta en el diccionario.
+Quizas quiso decir: suspendiese, suspendiste, suspendi se, suspendias, suspendi ses
+Linea 5, 'mollis' no esta en el diccionario.
+Quizas quiso decir: mol lis, mullis, molais, moleis, mollas
+Linea 5, 'vestibulum' no esta en el diccionario.
+Quizas quiso decir: vestibulo, vestibulos, vesti ulua, vesti bum, vesti bula
+Linea 6, 'dictum' no esta en el diccionario.
+Quizas quiso decir: ictus, dicta, dicte, dicto, rictus
+Linea 6, 'phasellus' no esta en el diccionario.
+Quizas quiso decir: ha sellas, has ellas, ha selles, has elles, ha sellos
+Linea 7, 'hac' no esta en el diccionario.
+Quizas quiso decir: ha, tac, han, hao, has
+Linea 7, 'habitasse' no esta en el diccionario.
+Quizas quiso decir: habitas se, habitase, habitases, habitaste, abitas se
+Linea 8, 'dictumst' no esta en el diccionario.
+Quizas quiso decir: ictus, dictas, dictes, dictase, dictaste
+Linea 8, 'mauris' no esta en el diccionario.
+Quizas quiso decir: cauris, maoris, mauras, maures, mauros
+Linea 8, 'tristique' no esta en el diccionario.
+Quizas quiso decir: tris tique, rustique, critique, trisque, triseque
+Linea 8, 'nec' no esta en el diccionario.
+Quizas quiso decir: ne, nea, nen, neo, ce
+Linea 8, 'erat' no esta en el diccionario.
+Quizas quiso decir: era, erad, eral, eran, erar
+Linea 8, 'suscipit' no esta en el diccionario.
+Quizas quiso decir: incipit, susidio, sus ipil, suscita, suscite
+Linea 8, 'faucibua' no esta en el diccionario.
+Quizas quiso decir: uci bua, luci bua, auca bua, aduci bua, fui bua

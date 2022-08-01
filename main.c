@@ -9,10 +9,17 @@
 #include "Headers/functions.h"
 
 #include "Headers/correctWord.h"
-int main()
+int main(int argc, char **argv)
 {
+    if (argc < 3)
+        exit(1);
+    printf("%s %s \n", argv[1], argv[2]);
     TablaHash table = readDictionary("diccionario.txt");
-    text("input.txt", table);
-    dict_destroy(table);
+    if (table)
+    {
+        text("input.txt", table);
+        dict_destroy(table);
+    }
+
     return 0;
 }

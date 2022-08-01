@@ -19,7 +19,7 @@ typedef SNodo *SList;
 SList list_create();
 
 /**
- *
+ * Mete un elemento en la primera posicion de la lista
  */
 void list_push(SList *list, void *data);
 #endif /* __SLIST_H__ */

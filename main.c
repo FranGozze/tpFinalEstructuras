@@ -13,8 +13,8 @@ int main(int argc, char **argv)
 {
     if (argc < 3)
     {
-        printf("Faltan Argumentos")
-            exit(1);
+        printf("Faltan Argumentos");
+        exit(1);
     }
     TablaHash dict = readDictionary("diccionario.txt");
     if (dict)

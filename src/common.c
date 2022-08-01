@@ -41,7 +41,6 @@ void text(char *texPath, TablaHash dict, char *outputPath)
         char buff[255];
         int line = 1, position = 0, flag = 1;
         TablaHash table = new_correct_dict(WORDS_SIZE);
-
         while (flag)
         {
             buff[position] = fgetc(input);
@@ -61,17 +60,16 @@ void text(char *texPath, TablaHash dict, char *outputPath)
                     correctWord *word = create_correction(entry);
                     if (!find_tablahash(table, word))
                     {
-                        corrections(word, dict);
+                        suggestions(word, dict);
                         insert_tablehash(table, word);
-                        if (word->corrections[0])
+                        if (word->suggestions[0])
                         {
                             fprintf(output, "Line %d, '%s' no esta en el diccionario.\nQuizas quiso decir: ", line, word->entry->key);
                             for (int i = 0; i < 5; i++)
                             {
-                                if (word->corrections[i])
-                                    fprintf(output, "%s", word->corrections[i]->key);
-
-                                if (word->corrections[i + 1])
+                                if (word->suggestions[i])
+                                    fprintf(output, "%s", word->suggestions[i]->key);
+                                if (word->suggestions[i + 1])
                                     fprintf(output, ", ");
                             }
                             fprintf(output, "\n");

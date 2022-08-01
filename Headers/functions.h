@@ -54,7 +54,7 @@ void separate_words(dict_entry_s *word, dict_entry_s *results[], int *correctWor
     correcciones la funcion hara hasta 3 ciclos, donde en cada ciclo aplicara las reglas a las palabras obtenidas en el ciclo anterior
     (a excepcion del primer ciclo que simplemente aplicara las reglas a la palabra original)
 */
-void corrections(correctWord *word, TablaHash table);
+void suggestions(correctWord *word, TablaHash table);
 
 /*
     char*, int, char, unsigned ->  char*

@@ -189,7 +189,7 @@ void separate_words(dict_entry_s *word, dict_entry_s *results[], int *correctWor
     }
 }
 
-void corrections(correctWord *word, TablaHash table)
+void suggestions(correctWord *word, TablaHash table)
 {
     int wordLength = word->entry->keyLength;
     int *correctWordsAmount = malloc(sizeof(int));
@@ -228,9 +228,10 @@ void corrections(correctWord *word, TablaHash table)
         case 0:
             for (int firstFunction = 0; firstFunction < 5 && (*correctWordsAmount) < MAX_WORDS; firstFunction++)
             {
-                (*proccess[firstFunction])(word->entry, word->corrections, correctWordsAmount, PartialResultsTable, table, partialResults, partialResultsAmount, step);
+                (*proccess[firstFunction])(word->entry, word->suggestions, correctWordsAmount, PartialResultsTable, table, partialResults, partialResultsAmount, step);
             }
             break;
+        // en este paso usaremos las palabras calculadas en el anterior
         case 1:
 
             for (unsigned int i = 0; i < FirstResultsAmount && (*correctWordsAmount) < MAX_WORDS; i++)
@@ -238,17 +239,18 @@ void corrections(correctWord *word, TablaHash table)
 
                 for (int firstFunction = 0; firstFunction < 5 && (*correctWordsAmount) < MAX_WORDS; firstFunction++)
                 {
-                    (*proccess[firstFunction])(partialResults[i], word->corrections, correctWordsAmount, PartialResultsTable, table, partialResults, partialResultsAmount, step);
+                    (*proccess[firstFunction])(partialResults[i], word->suggestions, correctWordsAmount, PartialResultsTable, table, partialResults, partialResultsAmount, step);
                 }
             }
             break;
+        // en este paso usaremos las palabras calculadas en el anterior
         case 2:
             for (unsigned int i = FirstResultsAmount; partialResults[i] && i < ResultsAmount && (*correctWordsAmount) < MAX_WORDS; i++)
             {
 
                 for (int firstFunction = 0; firstFunction < 5 && (*correctWordsAmount) < MAX_WORDS; firstFunction++)
                 {
-                    (*proccess[firstFunction])(partialResults[i], word->corrections, correctWordsAmount, PartialResultsTable, table, partialResults, partialResultsAmount, step);
+                    (*proccess[firstFunction])(partialResults[i], word->suggestions, correctWordsAmount, PartialResultsTable, table, partialResults, partialResultsAmount, step);
                 }
             }
             break;

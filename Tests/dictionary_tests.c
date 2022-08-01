@@ -9,7 +9,7 @@
 void test_create_entry()
 {
     char *test = malloc(sizeof(char) * 4);
-    strcmp(test, "abc");
+    strcpy(test, "abc");
     dict_entry_s *entry = create_entry_with_copy(test, 3);
     dict_entry_s *entry2 = create_entry_with_reference(test, 3);
     assert(strcmp(entry->key, test) == 0 && entry->key != test && entry->keyLength);
@@ -21,9 +21,8 @@ void test_create_entry()
 
 void test_dict_hash()
 {
-    char *test = malloc(sizeof(char) * 4);
-    strcpy(test, "abc");
-    dict_entry_s *entry = create_entry_with_reference(test, 3);
+
+    dict_entry_s *entry = create_entry_with_copy("abc", 3);
     // la propia funcion de create_entry llama a dict_hash
     assert(entry->hash == 96354);
     dict_free(entry);
@@ -60,9 +59,7 @@ void test_dict_add()
     assert(table->elems[entry3->hash % table->capacidad]->sig->data == entry1);
     assert(table->elems[entry3->hash % table->capacidad]->sig->sig == NULL);
 
-    dict_free(entry1);
-    dict_free(entry2);
-    dict_free(entry3);
+    dict_destroy(table);
 }
 
 void test_dict_find()
@@ -77,12 +74,13 @@ void test_dict_find()
     assert(dict_find(table, entry2) == 0);
     assert(dict_find(table, entry3) == 1);
 
-    dict_free(entry1);
+    dict_destroy(table);
     dict_free(entry2);
     dict_free(entry3);
 }
 int main()
 {
+    // La funcion que se encarga de hacer los frees se testea con valgrind
     test_create_entry();
     test_dict_hash();
     test_dict_cmp();

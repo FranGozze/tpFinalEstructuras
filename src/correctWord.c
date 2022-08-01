@@ -9,9 +9,9 @@ correctWord *create_correction(dict_entry_s *entry)
 {
     correctWord *word = malloc(sizeof(correctWord));
     word->entry = entry;
-    word->corrections = malloc(sizeof(dict_entry_s *) * 6);
+    word->suggestions = malloc(sizeof(dict_entry_s *) * 6);
     for (int i = 0; i < 6; i++)
-        word->corrections[i] = NULL;
+        word->suggestions[i] = NULL;
 
     return word;
 }
@@ -23,9 +23,9 @@ void corrections_free(correctWord *word)
 {
     dict_free(word->entry);
     for (int i = 0; i < 5; i++)
-        if (word->corrections[i])
-            dict_free(word->corrections[i]);
-    free(word->corrections);
+        if (word->suggestions[i])
+            dict_free(word->suggestions[i]);
+    free(word->suggestions);
     free(word);
 }
 int corrections_cmp(correctWord *word, correctWord *word2)
@@ -36,11 +36,6 @@ correctWord *corrections_copy(correctWord *word)
 {
     correctWord *copy = create_correction(word->entry);
     return copy;
-}
-
-int corrections_find(TablaHash table, correctWord *entry)
-{
-    return find_tablahash(table, entry) ? 1 : 0;
 }
 
 TablaHash new_correct_dict(int size)

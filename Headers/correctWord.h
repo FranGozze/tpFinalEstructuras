@@ -6,7 +6,7 @@
 typedef struct _correctWord
 {
     dict_entry_s *entry;
-    dict_entry_s **corrections;
+    dict_entry_s **suggestions;
 } correctWord;
 
 /*
@@ -33,11 +33,6 @@ int corrections_cmp(correctWord *entry1, correctWord *entry2);
     copia una correcion
 */
 correctWord *corrections_copy(correctWord *entry);
-
-/*
-    Busca una correcion en la tabla, y si la encuentra devuelve 1, en caso contrario 0
-*/
-int corrections_find(TablaHash table, correctWord *entry);
 
 /*
     Crea un tabla de correciones, con sus funciones correspondientes

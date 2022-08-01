@@ -1,4 +1,4 @@
-#include "Headers/slist.h"
+#include "../Headers/slist.h"
 #include <stdlib.h>
 
 SList list_create()

@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Headers/slist.h"
-#include "Headers/dictionary.h"
-#include "Headers/tablahash.h"
-#include "Headers/functions.h"
-#include "Headers/correctWord.h"
+#include "../Headers/slist.h"
+#include "../Headers/dictionary.h"
+#include "../Headers/tablahash.h"
+#include "../Headers/functions.h"
+#include "../Headers/correctWord.h"
 
 #define MAX_WORDS 5
 #define MAX_STEPS 3

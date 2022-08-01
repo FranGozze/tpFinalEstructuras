@@ -1,18 +1,10 @@
-#include "Headers/tablahash.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "Headers/slist.h"
-
-/**
- * Casillas en la que almacenaremos los datos de la tabla hash.
- */
-typedef struct
-{
-  void *dato;
-} CasillaHash;
+#include "../Headers/tablahash.h"
+#include "../Headers/slist.h"
 
 /**
  * Estructura principal que representa la tabla hash.

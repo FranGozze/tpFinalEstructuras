@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "Headers/dictionary.h"
-#include "Headers/dictionary.h"
+#include "../Headers/dictionary.h"
+#include "../Headers/dictionary.h"
 dict_entry_s *create_entry_with_copy(char *key, int keyLength)
 {
     dict_entry_s *entry = malloc(sizeof(dict_entry_s));

@@ -4,6 +4,9 @@
         "string.h": "c",
         "slist.h": "c",
         "stdlib.h": "c",
-        "tablahash.h": "c"
+        "tablahash.h": "c",
+        "dictionary.h": "c",
+        "functions.h": "c",
+        "stdio.h": "c"
     }
 }

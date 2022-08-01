@@ -14,11 +14,11 @@ int main(int argc, char **argv)
     if (argc < 3)
         exit(1);
     printf("%s %s \n", argv[1], argv[2]);
-    TablaHash table = readDictionary("diccionario.txt");
-    if (table)
+    TablaHash dict = readDictionary("diccionario.txt");
+    if (dict)
     {
-        text("input.txt", table);
-        dict_destroy(table);
+        text(argv[1], dict, argv[2]);
+        dict_destroy(dict);
     }
 
     return 0;

@@ -12,6 +12,6 @@ TablaHash readDictionary(char *dictPath);
     Esta funcion lee un archivo donde esten guardas palabras, las busca en un tabla hash cargada previamente.
     En caso de no encontrarla, busca posibles correciones y las imprime en un archivo de texto.
 */
-void text(char *texPath, TablaHash dict);
+void text(char *texPath, TablaHash dict, char *outputPath);
 
 #endif /* __COMMON_H__ */

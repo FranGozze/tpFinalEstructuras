@@ -5,23 +5,24 @@ Implementación de un corrector ortográfico utilizando tablas hash. El enunciad
 Para compilar el programa, correr el siguiente comando:
 
 ```bash
-make
+make run
 ```
 
+El path diccionario es fijo y es en el archivo diccionario.txt. Dentro estara lo que se tomara como diccionario
 Para ejecutar el programa, correr el siguiente comando:
 
 ```bash
-./check_spelling <input> <output>
+./corrector <input> <output>
 ```
 
-Para compilar los tests, correr el siguiente comando:
+Para compilar y correr los tests, correr el siguiente comando:
 
 ```bash
 make test
 ```
 
-Para ejecutar los tests, correr el siguiente comando:
+Para compilar y correr valgrind, correr el siguiente comando:
 
 ```bash
-./test
+make memory
 ```

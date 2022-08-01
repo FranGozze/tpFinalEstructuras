@@ -9,7 +9,7 @@ dict_entry_s *create_entry_with_copy(char *key, int keyLength)
     dict_entry_s *entry = malloc(sizeof(dict_entry_s));
     entry->key = malloc(sizeof(char) * keyLength + 1);
     for (int i = 0; i < keyLength; i++)
-        entry->key[i] = tolower(key[i]);
+        entry->key[i] = key[i];
     entry->key[keyLength] = '\0';
     entry->keyLength = keyLength;
     entry->hash = KRHash(entry->key);
@@ -57,7 +57,7 @@ void dict_destroy(TablaHash table)
     destroy_tablehash(table);
 }
 
-TablaHash new_dict(int size)
+TablaHash new_dict(unsigned int size)
 {
     return create_tablehash(size, (FuncionCopiadora)dict_copy, (FuncionComparadora)dict_cmp, (FuncionDestructora)dict_free, (FuncionHash)dict_hash);
 }

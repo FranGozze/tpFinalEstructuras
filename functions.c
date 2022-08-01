@@ -211,11 +211,11 @@ void corrections(correctWord *word, TablaHash table)
     // caso change
     SecondResultsAmount += (FirstResultsAmount - ((wordLength + 1) * 26) - wordLength) * (wordLength)*26 + (wordLength + 1) * 26 * (wordLength + 1) * 26 + (wordLength) * (wordLength - 1) * 26;
 
-    int ResultsAmount = FirstResultsAmount + SecondResultsAmount;
+    unsigned int ResultsAmount = FirstResultsAmount + SecondResultsAmount;
 
-    TablaHash PartialResultsTable = new_dict((int)(ResultsAmount / 0.5));
+    TablaHash PartialResultsTable = new_dict((unsigned int)(ResultsAmount / 0.5));
     dict_entry_s **partialResults = malloc(sizeof(dict_entry_s *) * ResultsAmount);
-    for (int i = 0; i < ResultsAmount; i++)
+    for (unsigned int i = 0; i < ResultsAmount; i++)
         partialResults[i] = NULL;
 
     unsigned int *partialResultsAmount = malloc(sizeof(int));
@@ -243,10 +243,9 @@ void corrections(correctWord *word, TablaHash table)
             }
             break;
         case 2:
-            for (unsigned int i = FirstResultsAmount; partialResults[i] && i < (SecondResultsAmount + FirstResultsAmount) && (*correctWordsAmount) < MAX_WORDS; i++)
+            for (unsigned int i = FirstResultsAmount; partialResults[i] && i < ResultsAmount && (*correctWordsAmount) < MAX_WORDS; i++)
             {
 
-                int partialLength = partialResults[i]->keyLength;
                 for (int firstFunction = 0; firstFunction < 5 && (*correctWordsAmount) < MAX_WORDS; firstFunction++)
                 {
                     (*proccess[firstFunction])(partialResults[i], word->corrections, correctWordsAmount, PartialResultsTable, table, partialResults, partialResultsAmount, step);

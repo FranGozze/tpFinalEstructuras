@@ -57,5 +57,5 @@ void dict_destroy(TablaHash table);
     Esta funcion crea un nuevo diccionario con el tamaño indicado,
      y con las funciones correspondientes a dict_entry_s
 */
-TablaHash new_dict(int size);
+TablaHash new_dict(unsigned int size);
 #endif /* __DICTIONARY_H_ */

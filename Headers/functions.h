@@ -57,6 +57,7 @@ void separate_words(dict_entry_s *word, dict_entry_s *results[], int *correctWor
 void corrections(correctWord *word, TablaHash table);
 
 /*
+    char*, int, char, unsigned ->  char*
     Esta funcion inserta una letra a una palabra en una posicion especifica
 */
 char *addInPosition(char *str, int strSize, char c, unsigned num);

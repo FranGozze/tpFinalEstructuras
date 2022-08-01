@@ -36,24 +36,22 @@ void text(char *texPath, TablaHash dict)
     FILE *input = fopen(texPath, "rb");
     FILE *output = fopen("salida.txt", "wb");
     char buff[255];
-    int linea = 1, posicion = 0, ban = 1;
+    int line = 1, position = 0, flag = 1;
     TablaHash table = new_correct_dict(WORDS_SIZE);
 
-    while (ban)
+    while (flag)
     {
-        buff[posicion] = fgetc(input);
-        if (isalpha(buff[posicion]))
-            buff[posicion++] = tolower(buff[posicion]);
-
-        else if (buff[posicion] == ' ' || buff[posicion] == '\n' || buff[posicion] == EOF)
+        buff[position] = fgetc(input);
+        if (isalpha(buff[position]))
+            buff[position++] = tolower(buff[position]);
+        else if (buff[position] == ' ' || buff[position] == '\n' || buff[position] == EOF)
         {
-            if (buff[posicion] == EOF)
-                ban = 0;
-
-            if (buff[posicion] == '\n')
-                linea++;
-            buff[posicion] = '\0';
-            posicion = 0;
+            if (buff[position] == EOF)
+                flag = 0;
+            if (buff[position] == '\n')
+                line++;
+            buff[position] = '\0';
+            position = 0;
             dict_entry_s *entry = create_entry_with_copy(buff, strlen(buff));
             if (!dict_find(dict, entry))
             {
@@ -65,7 +63,7 @@ void text(char *texPath, TablaHash dict)
                     insert_tablehash(table, word);
                     if (word->corrections[0])
                     {
-                        fprintf(output, "Linea %d, '%s' no esta en el diccionario.\nQuizas quiso decir: ", linea, word->entry->key);
+                        fprintf(output, "Line %d, '%s' no esta en el diccionario.\nQuizas quiso decir: ", line, word->entry->key);
                         for (int i = 0; i < 5; i++)
                         {
                             if (word->corrections[i])

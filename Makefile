@@ -1,6 +1,6 @@
 run: main.c slist.c tablahash.c dictionary.c common.c functions.c correctWord.c
 	- clear
-	- gcc main.c  slist.c tablahash.c dictionary.c common.c  functions.c correctWord.c -o main  
+	- gcc main.c  slist.c tablahash.c dictionary.c common.c  functions.c correctWord.c -o main 
 	- time ./main input.txt salida.txt
 	-rm main
 val: main.c slist.c tablahash.c dictionary.c common.c functions.c correctWord.c
